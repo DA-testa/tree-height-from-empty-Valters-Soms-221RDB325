@@ -26,41 +26,61 @@ def compute_height(node):
 def main():
 
     input_text = input()
-    if "F" in input_text:
+    if input_text == 'F':
+
         input_file = input()
         if "a" not in input_file:
-            f = open(input_file, 'r')
-            n = f.readline()
-            parents = f.readline()
-            f.close()
-            node_list = []
-            for i in range(n):
-                node_list.append(node_ob(parents[i]))
 
-            for ch_index in range(n):
-                par_index = parents[ch_index]
-                if par_index == -1:
-                    root = ch_index
-                else:
-                    node_list[par_index].addCh(node_list[ch_index])
-            
-            if len(node_list) == 0:
+            try:
+                with open(input_file, 'r') as f:
+                    n = f.readline()
+                    parents = f.readline()
+                f.close()
+
+                node_list = []
+                for i in range(n):
+                    node_list.append(node_ob(parents[i]))
+
+                for ch_index in range(n):
+                    par_index = parents[ch_index]
+                    if par_index == -1:
+                        root = ch_index
+                    else:
+                        node_list[par_index].addCh(node_list[ch_index])
+                
+                if len(node_list) == 0:
+                    return 0
+
+                height = compute_height(node_list[root]) + 1
+                print(height)
                 return 0
 
-            height = compute_height(node_list[root]) + 1
-    
-            print(height)
-            return 0
+            except FileNotFoundError:
+                print("File not found")
+                return 0
 
-    if "I" in input_text:
+    if input_text == 'I':
         n = int(input())
         parents = list(map(int, input().split()))
+        node_list = []
+        for i in range(n):
+            node_list.append(node_ob(parents[i]))
 
+        for ch_index in range(n):
+            par_index = parents[ch_index]
+            if par_index == -1:
+                root = ch_index
+            else:
+                node_list[par_index].addCh(node_list[ch_index])
+                if len(node_list) == 0:
+                    return 0
+        height = compute_height(node_list[root]) + 1
+        print(height)
+        return 0
+        
 # In Python, the default limit on recursion depth is rather low,
 # so raise it here for this problem. Note that to take advantage
 # of bigger stack, we have to launch the computation in a new thread.
 sys.setrecursionlimit(10**7)  # max depth of recursion
 threading.stack_size(2**27)   # new thread will get stack of such size
 threading.Thread(target=main).start()
-main()
-# print(numpy.array([1,2,3]))
