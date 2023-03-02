@@ -1,41 +1,60 @@
 # python3
-
 import sys
 import threading
 import numpy
 
+class node_ob:
+    def __init__(self, parent, child=None):
+        self.parent = parent
+        self.child = child
+    def addCh(self, node):
+        if self.child is None: 
+            self.child = []
+        self.child.append(node) 
 
-def compute_height(n, parents):
-    # Write this function
-    max_height = 0
-    # Your code here
-    return max_height
+def compute_height(node):
+
+    if node.child is None:
+        return 0
+    children = node.child
+    deep_list = []
+    for child in children:
+        deep_list.append(compute_height(child))
+    return max(deep_list, default=0) + 1
 
 
 def main():
+
     input_text = input()
+    if "F" in input_text:
+        input_file = input()
+        if "a" not in input_file:
+            f = open(input_file, 'r')
+            n = f.readline()
+            parents = f.readline()
+            f.close()
+            node_list = []
+            for i in range(n):
+                node_list.append(node_ob(parents[i]))
+
+            for ch_index in range(n):
+                par_index = parents[ch_index]
+                if par_index == -1:
+                    root = ch_index
+                else:
+                    node_list[par_index].addCh(node_list[ch_index])
+            
+            if len(node_list) == 0:
+                return 0
+
+            height = compute_height(node_list[root]) + 1
+    
+            print(height)
+            return 0
+
     if "I" in input_text:
-        text = input()
-        print(text)
-    #if "F" in input_text:
-    #    input_file = input()
-    #    if "a" not in input_file:
-    #        f = open(input_file, 'r')
-    #        Node_skaits = f.readline()
-    #        print(Node_skaits)
-    #        Node_vieta = f.readline()
-    #        print(Node_vieta)
-    #        f.close()
-
-    # implement input form keyboard and from files
-    
-    # let user input file name to use, don't allow file names with letter a
-    # account for github input inprecision
-    
-    # input number of elements
-    # input values in one variable, separate with space, split these values in an array
-    # call the function and output it's result
-
+        n = int(input())
+        parents = list(map(int, input().split()))
 
 # In Python, the default limit on recursion depth is rather low,
 # so raise it here for this problem. Note that to take advantage
