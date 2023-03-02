@@ -15,6 +15,7 @@ def compute_height(n, parents):
     return max_height
 
 def main():
+    n = 0
     print("input format: ")
     input_text = input()
     if input_text == 'F':
