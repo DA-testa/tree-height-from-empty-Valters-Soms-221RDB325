@@ -16,6 +16,7 @@ def compute_height(n, parents):
 
 def main():
     n = 0
+    parents = 0
     print("input format: ")
     input_text = input()
     if input_text == 'F':
