@@ -29,15 +29,13 @@ def main():
     if input_text == 'F':
 
         input_file = input()
-        if "a" not in input_file:
+        if 'a' not in input_file:
             try:
-                with open(input_file,mode = "r") as f:
+                with open(input_file, "r", encoding="utf-8") as f:
                     n = int(f.readline())
                     parents = list(map(int, f.readline().split()))
-                f.close()
-
+            
                 node_list = []
-                i = 0
                 for i in range(n):
                     node_list.append(node_ob(parents[i]))
 
@@ -53,6 +51,7 @@ def main():
 
                 height = compute_height(node_list[root]) + 1
                 print(height)
+                f.close()
                 return 0
 
             except FileNotFoundError:
@@ -77,7 +76,7 @@ def main():
         height = compute_height(node_list[root]) + 1
         print(height)
         return 0
-
+        
 # In Python, the default limit on recursion depth is rather low,
 # so raise it here for this problem. Note that to take advantage
 # of bigger stack, we have to launch the computation in a new thread.
