@@ -29,9 +29,10 @@ def main():
     if input_text == 'F':
 
         input_file = input()
+        input_file = "test/" + input_file
         if 'a' not in input_file:
             try:
-                with open("test/" + input_file, "r", encoding="utf-8") as f:
+                with open(input_file, "r") as f:
                     n = int(f.readline())
                     parents = list(map(int, f.readline().split()))
             
