@@ -28,10 +28,8 @@ def main():
     input_text = input()
     if input_text == 'F':
 
-        #input_file = input()
-        input_file = "./test/01"
+        input_file = input()
         if "a" not in input_file:
-
             try:
                 with open(input_file,mode = 'r') as f:
                     n = int(f.readline())
