@@ -31,7 +31,7 @@ def main():
         input_file = input()
         if 'a' not in input_file:
             try:
-                with open("/test/" + input_file, "r", encoding="utf-8") as f:
+                with open("test/" + input_file, "r", encoding="utf-8") as f:
                     n = int(f.readline())
                     parents = list(map(int, f.readline().split()))
             
