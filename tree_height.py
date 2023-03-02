@@ -31,7 +31,7 @@ def main():
         input_file = input()
         if "a" not in input_file:
             try:
-                with open(input_file,mode = 'r') as f:
+                with open(input_file,mode = "r") as f:
                     n = int(f.readline())
                     parents = list(map(int, f.readline().split()))
                 f.close()
