@@ -24,7 +24,7 @@ def main():
             try:
                 with open(input_file, "r") as f:
                     n = int(f.readline())
-                    parents = numpy.array(list(map(int, f.readline().split())))
+                    parents = list(map(int, f.readline().split()))
                     print(compute_height(n, parents))
 
             except FileNotFoundError:
@@ -33,7 +33,7 @@ def main():
 
     if input_text == 'I':
         n = int(input())
-        parents = numpy.array(list(map(int, input().split())))
+        parents = list(map(int, input().split()))
         print(compute_height(n, parents))
     
         
