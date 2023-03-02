@@ -25,7 +25,7 @@ def main():
                 with open(input_file, "r") as f:
                     n = int(f.readline())
                     parents = list(map(int, f.readline().split()))
-                    print(compute_height(n, parents))
+                    print(int(print(compute_height(n, parents))))
 
             except FileNotFoundError:
                 print("File not found")
