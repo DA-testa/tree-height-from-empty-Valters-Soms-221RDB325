@@ -25,16 +25,15 @@ def main():
                 with open(input_file, "r") as f:
                     n = int(f.readline())
                     parents = list(map(int, f.readline().split()))
-                    print(int(print(compute_height(n, parents))))
+                    print(compute_height(n, parents))
 
             except FileNotFoundError:
-                print("File not found")
-                return 0
+                return print("File_not_found_error")
 
     if input_text == 'I':
         n = int(input())
         parents = list(map(int, input().split()))
-        print(int((compute_height(n, parents))))
+        print(compute_height(n, parents))
     
         
     # In Python, the default limit on recursion depth is rather low,
@@ -43,4 +42,3 @@ def main():
 sys.setrecursionlimit(10**7)  # max depth of recursion
 threading.stack_size(2**27)   # new thread will get stack of such size
 threading.Thread(target=main).start()
-#main()
