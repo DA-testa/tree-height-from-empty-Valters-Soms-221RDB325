@@ -24,10 +24,8 @@ def compute_height(node):
 
 
 def main():
-
     input_text = input()
     if input_text == 'F':
-
         input_file = input()
         input_file = "test/" + input_file
         if 'a' not in input_file:
@@ -84,3 +82,4 @@ def main():
 sys.setrecursionlimit(10**7)  # max depth of recursion
 threading.stack_size(2**27)   # new thread will get stack of such size
 threading.Thread(target=main).start()
+main()
