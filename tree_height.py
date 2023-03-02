@@ -28,16 +28,18 @@ def main():
     input_text = input()
     if input_text == 'F':
 
-        input_file = input()
+        #input_file = input()
+        input_file = "./test/01"
         if "a" not in input_file:
 
             try:
                 with open(input_file,mode = 'r') as f:
-                    n = f.readline()
-                    parents = f.readline()
+                    n = int(f.readline())
+                    parents = list(map(int, f.readline().split()))
                 f.close()
 
                 node_list = []
+                i = 0
                 for i in range(n):
                     node_list.append(node_ob(parents[i]))
 
