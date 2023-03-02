@@ -32,7 +32,7 @@ def main():
         if "a" not in input_file:
 
             try:
-                with open(input_file, 'r') as f:
+                with open(input_file,mode = 'r') as f:
                     n = f.readline()
                     parents = f.readline()
                 f.close()
@@ -77,7 +77,7 @@ def main():
         height = compute_height(node_list[root]) + 1
         print(height)
         return 0
-        
+
 # In Python, the default limit on recursion depth is rather low,
 # so raise it here for this problem. Note that to take advantage
 # of bigger stack, we have to launch the computation in a new thread.
