@@ -15,7 +15,7 @@ def compute_height(n, parents):
     return max_height
 
 def main():
-    print("input format: ")
+    #print("input format: ")
     input_text = input()
     if input_text == 'F':
         input_file = input()
