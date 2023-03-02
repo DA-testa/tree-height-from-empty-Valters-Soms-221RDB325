@@ -34,7 +34,7 @@ def main():
     if input_text == 'I':
         n = int(input())
         parents = list(map(int, input().split()))
-        print(compute_height(n, parents))
+        print(int((compute_height(n, parents))))
     
         
     # In Python, the default limit on recursion depth is rather low,
