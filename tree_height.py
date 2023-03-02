@@ -25,9 +25,6 @@ def main():
                 with open(input_file, "r") as f:
                     n = int(f.readline())
                     parents = numpy.array(list(map(int, f.readline().split())))
-                    height = compute_height(n, parents)
-                    print(height)
-                    return height
 
             except FileNotFoundError:
                 print("File not found")
@@ -36,9 +33,8 @@ def main():
     if input_text == 'I':
         n = int(input())
         parents = numpy.array(list(map(int, input().split())))
-        height = compute_height(n, parents)
-        print(height)
-        return height
+
+    print(compute_height(n, parents))
         
     # In Python, the default limit on recursion depth is rather low,
     # so raise it here for this problem. Note that to take advantage
