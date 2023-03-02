@@ -3,27 +3,19 @@ import sys
 import threading
 import numpy
 
-class node_ob:
-    def __init__(self, parent, child=None):
-        self.parent = parent
-        self.child = child
-    def addCh(self, node):
-        if self.child is None: 
-            self.child = []
-        self.child.append(node) 
-
-def compute_height(node):
-
-    if node.child is None:
-        return 0
-    children = node.child
-    deep_list = []
-    for child in children:
-        deep_list.append(compute_height(child))
-    return max(deep_list, default=0) + 1
-
+def compute_height(n, parents):
+    max_height = 0
+    for x in range(n):
+        height = 0
+        y = x
+        while y != -1:
+            height = height + 1
+            y = parents[y]
+        max_height = max(max_height, height)
+    return max_height
 
 def main():
+    print("input format: ")
     input_text = input()
     if input_text == 'F':
         input_file = input()
@@ -32,53 +24,26 @@ def main():
             try:
                 with open(input_file, "r") as f:
                     n = int(f.readline())
-                    parents = list(map(int, f.readline().split()))
-            
-                node_list = []
-                for i in range(n):
-                    node_list.append(node_ob(parents[i]))
-
-                for ch in range(n):
-                    par = parents[ch]
-                    if par == -1:
-                        root = ch
-                    else:
-                        node_list[par].addCh(node_list[ch])
-                
-                if len(node_list) == 0:
-                    return 0
-
-                height = compute_height(node_list[root]) + 1
-                #print(height)
-                f.close()
-                return height
+                    parents = numpy.array(list(map(int, f.readline().split())))
+                    height = compute_height(n, parents)
+                    print(height)
+                    return height
 
             except FileNotFoundError:
-                return print("File not found")
+                print("File not found")
+                return 0
 
     if input_text == 'I':
         n = int(input())
-        parents = list(map(int, input().split()))
-        node_list = []
-        for i in range(n):
-            node_list.append(node_ob(parents[i]))
-
-        for ch in range(n):
-            par = parents[ch]
-            if par == -1:
-                root = ch
-            else:
-                node_list[par].addCh(node_list[ch])
-                if len(node_list) == 0:
-                    return 0
-        height = compute_height(node_list[root]) + 1
-        #print(height)
+        parents = numpy.array(list(map(int, input().split())))
+        height = compute_height(n, parents)
+        print(height)
         return height
         
-# In Python, the default limit on recursion depth is rather low,
-# so raise it here for this problem. Note that to take advantage
-# of bigger stack, we have to launch the computation in a new thread.
+    # In Python, the default limit on recursion depth is rather low,
+    # so raise it here for this problem. Note that to take advantage
+    # of bigger stack, we have to launch the computation in a new thread.
 sys.setrecursionlimit(10**7)  # max depth of recursion
 threading.stack_size(2**27)   # new thread will get stack of such size
 threading.Thread(target=main).start()
-main()
+#main()
