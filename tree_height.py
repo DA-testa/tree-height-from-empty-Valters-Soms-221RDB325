@@ -38,24 +38,23 @@ def main():
                 for i in range(n):
                     node_list.append(node_ob(parents[i]))
 
-                for ch_index in range(n):
-                    par_index = parents[ch_index]
-                    if par_index == -1:
-                        root = ch_index
+                for ch in range(n):
+                    par = parents[ch]
+                    if par == -1:
+                        root = ch
                     else:
-                        node_list[par_index].addCh(node_list[ch_index])
+                        node_list[par].addCh(node_list[ch])
                 
                 if len(node_list) == 0:
                     return 0
 
                 height = compute_height(node_list[root]) + 1
-                print(height)
+                #print(height)
                 f.close()
-                return 0
+                return height
 
             except FileNotFoundError:
-                print("File not found")
-                return 0
+                return print("File not found")
 
     if input_text == 'I':
         n = int(input())
@@ -64,17 +63,17 @@ def main():
         for i in range(n):
             node_list.append(node_ob(parents[i]))
 
-        for ch_index in range(n):
-            par_index = parents[ch_index]
-            if par_index == -1:
-                root = ch_index
+        for ch in range(n):
+            par = parents[ch]
+            if par == -1:
+                root = ch
             else:
-                node_list[par_index].addCh(node_list[ch_index])
+                node_list[par].addCh(node_list[ch])
                 if len(node_list) == 0:
                     return 0
         height = compute_height(node_list[root]) + 1
-        print(height)
-        return 0
+        #print(height)
+        return height
         
 # In Python, the default limit on recursion depth is rather low,
 # so raise it here for this problem. Note that to take advantage
