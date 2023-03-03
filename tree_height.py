@@ -4,16 +4,24 @@ import threading
 import numpy
 
 def compute_height(n, parents):
-    max_height = 0
-    for x in range(n):
-        height = 0
-        y = x
-        while y != -1:
-            height = height + 1
-            y = parents[y]
-        max_height = max(max_height, height)
-    return max_height
-
+    ###
+    h = {}
+    for i in range(n):
+        if i not in h:
+            height = 1
+            thisnode = i
+            while parents[thisnode] != -1:
+                parent = parents[thisnode]
+                if parent not in h:
+                    thisnode = parent
+                    height = height + 1
+                else:
+                    height = height + h[parent]
+                    break
+            h[i] = height
+    return max(h.values())
+    ###
+    
 def main():
     input_text = input()
     if 'F' in input_text:
@@ -33,11 +41,10 @@ def main():
         n = int(input())
         parents = numpy.array(list(map(int, input().split())))
         print(compute_height(n, parents))
-    
-        
-    # In Python, the default limit on recursion depth is rather low,
-    # so raise it here for this problem. Note that to take advantage
-    # of bigger stack, we have to launch the computation in a new thread.
+     
+# In Python, the default limit on recursion depth is rather low,
+# so raise it here for this problem. Note that to take advantage
+# of bigger stack, we have to launch the computation in a new thread.
 sys.setrecursionlimit(10**7)  # max depth of recursion
 threading.stack_size(2**27)   # new thread will get stack of such size
 threading.Thread(target=main).start()
