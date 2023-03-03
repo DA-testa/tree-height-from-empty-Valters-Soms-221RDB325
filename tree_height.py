@@ -15,9 +15,8 @@ def compute_height(n, parents):
     return max_height
 
 def main():
-    #print("input format: ")
     input_text = input()
-    if input_text == 'F':
+    if 'F' in input_text:
         input_file = input()
         input_file = "test/" + input_file
         if 'a' not in input_file:
@@ -30,7 +29,7 @@ def main():
             except FileNotFoundError:
                 return print("File_not_found_error")
 
-    if input_text == 'I':
+    if 'I' in input_text:
         n = int(input())
         parents = list(map(int, input().split()))
         print(compute_height(n, parents))
